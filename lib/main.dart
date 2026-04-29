@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'page/beranda_page.dart';
 import 'page/profile_page.dart';
-import 'pertemuan/pertemuan6.dart'; // Import Pertemuan 6
 
 void main() {
   runApp(const MyApp());
@@ -85,7 +84,6 @@ class _MyAppState extends State<MyApp> {
     final List<Widget> pages = [
       BerandaPage(profile: profile),
       ProfilePage(profile: profile, onSave: updateProfile),
-      Pertemuan6Page(), // Tambahkan page untuk pertemuan 6
     ];
 
     return MaterialApp(
