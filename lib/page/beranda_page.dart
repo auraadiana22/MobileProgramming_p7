@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../main.dart';
-import '../pertemuan/pertemuan5.dart';
+import '../pertemuan/pertemuan5.dart'; // Pastikan kalau ada pertemuan lain ditambahin disini
 
 class BerandaPage extends StatelessWidget {
   final ProfileData profile;
@@ -24,8 +24,10 @@ class BerandaPage extends StatelessWidget {
         title: "Pertemuan 6",
         color: Colors.green,
         onTap: () {
+          // Menambahkan aksi untuk Pertemuan 6
+          // Misalnya, jika ada tampilan lain yang ingin ditampilkan saat klik
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Halaman Pertemuan 6 belum dibuat")),
+            const SnackBar(content: Text("Tampilan untuk Pertemuan 6")),
           );
         },
       ),
