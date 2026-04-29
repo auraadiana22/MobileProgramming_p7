@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Flutter Web App</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flutter Web App</title>
+  <!-- Menghapus meta dan script lain yang tidak perlu -->
+  <script src="flutter.js" defer></script>
 </head>
 <body>
-    <h1>Hello, World!</h1>
+  <script>
+    // Menambahkan script untuk meluncurkan Flutter web di dalam halaman ini
+    window.addEventListener('load', function() {
+      // Pengaturan untuk Flutter
+      var script = document.createElement('script');
+      script.src = 'main.dart.js';  // Menggunakan main.dart.js yang terkompilasi oleh Flutter
+      script.defer = true;
+      document.body.appendChild(script);
+    });
+  </script>
 </body>
 </html>

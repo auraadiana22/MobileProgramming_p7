@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../main.dart';
-import 'produk_page.dart';
+import '../pertemuan/pertemuan5.dart';
 
 class BerandaPage extends StatelessWidget {
   final ProfileData profile;
