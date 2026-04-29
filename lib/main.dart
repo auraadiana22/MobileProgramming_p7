@@ -117,11 +117,6 @@ class _MyAppState extends State<MyApp> {
                 title: const Text("Profile"),
                 selectedColor: Colors.blue,
               ),
-              SalomonBottomBarItem(
-                icon: const Icon(Icons.event),
-                title: const Text("Pertemuan 6"),
-                selectedColor: Colors.green, // Untuk Pertemuan 6
-              ),
             ],
           ),
         ),
