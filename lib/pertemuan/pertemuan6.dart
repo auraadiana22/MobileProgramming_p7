@@ -20,7 +20,7 @@ class _Pertemuan6PageState extends State<Pertemuan6Page> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Form Data Diri"),
-        backgroundColor: Colors.green,
+        backgroundColor: const Color.fromARGB(255, 175, 76, 137),
       ),
       body: SingleChildScrollView(
         // Wrap the body with SingleChildScrollView to prevent overflow
