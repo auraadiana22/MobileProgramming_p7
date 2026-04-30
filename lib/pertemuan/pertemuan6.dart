@@ -113,6 +113,15 @@ class _Pertemuan6PageState extends State<Pertemuan6Page> {
                   });
                 },
               ),
+              CheckboxListTile(
+                title: const Text("Menonton"),
+                value: isTravelling,
+                onChanged: (bool? value) {
+                  setState(() {
+                    isTravelling = value!;
+                  });
+                },
+              ),
 
               const SizedBox(height: 20),
 
