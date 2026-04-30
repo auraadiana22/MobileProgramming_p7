@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../main.dart';
 import '../pertemuan/pertemuan5.dart';
+import '../pertemuan/pertemuan6.dart';
 
 class BerandaPage extends StatelessWidget {
   final ProfileData profile;
@@ -26,7 +27,7 @@ class BerandaPage extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => Pertemuan6Page()),
+            MaterialPageRoute(builder: (_) => Pertemuan6Page),
           );
         },
       ),
