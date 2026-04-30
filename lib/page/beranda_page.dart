@@ -24,8 +24,9 @@ class BerandaPage extends StatelessWidget {
         title: "Pertemuan 6",
         color: Colors.green,
         onTap: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Halaman Pertemuan 6 belum dibuat")),
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => Pertemuan6Page()),
           );
         },
       ),
