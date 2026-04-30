@@ -22,7 +22,8 @@ class _Pertemuan6PageState extends State<Pertemuan6Page> {
         title: const Text("Form Data Diri"),
         backgroundColor: Colors.green,
       ),
-      body: Padding(
+      body: SingleChildScrollView(
+        // Wrap the body with SingleChildScrollView to prevent overflow
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
