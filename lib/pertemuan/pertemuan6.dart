@@ -9,6 +9,10 @@ class Pertemuan6Page extends StatefulWidget {
 
 class _Pertemuan6PageState extends State<Pertemuan6Page> {
   final _formKey = GlobalKey<FormState>();
+  bool isMembaca = false;
+  bool isMusik = false;
+  bool isOlahraga = false;
+  bool isTravelling = false;
   bool isAgree = false;
 
   @override
@@ -74,37 +78,37 @@ class _Pertemuan6PageState extends State<Pertemuan6Page> {
               // Checkbox Hobi
               CheckboxListTile(
                 title: const Text("Membaca"),
-                value: isAgree,
+                value: isMembaca,
                 onChanged: (bool? value) {
                   setState(() {
-                    isAgree = value!;
+                    isMembaca = value!;
                   });
                 },
               ),
               CheckboxListTile(
                 title: const Text("Musik"),
-                value: isAgree,
+                value: isMusik,
                 onChanged: (bool? value) {
                   setState(() {
-                    isAgree = value!;
+                    isMusik = value!;
                   });
                 },
               ),
               CheckboxListTile(
                 title: const Text("Olahraga"),
-                value: isAgree,
+                value: isOlahraga,
                 onChanged: (bool? value) {
                   setState(() {
-                    isAgree = value!;
+                    isOlahraga = value!;
                   });
                 },
               ),
               CheckboxListTile(
                 title: const Text("Travelling"),
-                value: isAgree,
+                value: isTravelling,
                 onChanged: (bool? value) {
                   setState(() {
-                    isAgree = value!;
+                    isTravelling = value!;
                   });
                 },
               ),

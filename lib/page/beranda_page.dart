@@ -27,7 +27,9 @@ class BerandaPage extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => Pertemuan6Page()),
+            MaterialPageRoute(
+              builder: (_) => Pertemuan6Page(),
+            ), // Remove const here
           );
         },
       ),
