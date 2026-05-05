@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../main.dart';
 import '../pertemuan/pertemuan5.dart';
 import '../pertemuan/pertemuan6.dart';
+import '../pertemuan/pertemuan7.dart';
 
 class BerandaPage extends StatelessWidget {
   final ProfileData profile;
@@ -35,8 +36,9 @@ class BerandaPage extends StatelessWidget {
         title: "Pertemuan 7",
         color: Colors.orange,
         onTap: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Halaman Pertemuan 7 belum dibuat")),
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const RadiobuttonPage()),
           );
         },
       ),
@@ -94,6 +96,7 @@ class BerandaPage extends StatelessWidget {
                   ),
                   itemBuilder: (context, index) {
                     final item = items[index];
+
                     return GestureDetector(
                       onTap: item.onTap,
                       child: Container(
