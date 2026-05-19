@@ -1,47 +1,37 @@
 import 'package:flutter/material.dart';
 
-class Pertemuan9Page extends StatelessWidget {
+class Pertemuan9Page extends StatefulWidget {
   const Pertemuan9Page({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Date & Time Picker',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF6C63FF),
-          brightness: Brightness.light,
-        ),
-        useMaterial3: true,
-      ),
-      home: const DateTimePickerForm(),
-    );
-  }
+  State<Pertemuan9Page> createState() => _Pertemuan9PageState();
 }
 
-class DateTimePickerForm extends StatefulWidget {
-  const DateTimePickerForm({super.key});
-
-  @override
-  State<DateTimePickerForm> createState() => _DateTimePickerFormState();
-}
-
-class _DateTimePickerFormState extends State<DateTimePickerForm> {
+class _Pertemuan9PageState extends State<Pertemuan9Page> {
   final _formKey = GlobalKey<FormState>();
 
-  DateTime? _selectedDate;
-  TimeOfDay? _selectedTime;
-  DateTime? _selectedStartDate;
-  DateTime? _selectedEndDate;
-  DateTime? _selectedDateTime;
-
+  // Controllers
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
   final TextEditingController _startDateController = TextEditingController();
   final TextEditingController _endDateController = TextEditingController();
   final TextEditingController _dateTimeController = TextEditingController();
+
+  // Selected values
+  DateTime? _selectedDate;
+  TimeOfDay? _selectedTime;
+  DateTime? _selectedStartDate;
+  DateTime? _selectedEndDate;
+  DateTime? _selectedDateTime;
+
+  bool get _hasAnyValue =>
+      _titleController.text.isNotEmpty ||
+      _dateController.text.isNotEmpty ||
+      _timeController.text.isNotEmpty ||
+      _startDateController.text.isNotEmpty ||
+      _endDateController.text.isNotEmpty ||
+      _dateTimeController.text.isNotEmpty;
 
   @override
   void dispose() {
@@ -54,7 +44,7 @@ class _DateTimePickerFormState extends State<DateTimePickerForm> {
     super.dispose();
   }
 
-  // Format helpers (tanpa package intl / locale)
+  // Format helpers
   static const _namaBulan = [
     'Januari',
     'Februari',
@@ -79,7 +69,7 @@ class _DateTimePickerFormState extends State<DateTimePickerForm> {
   String _fmtTime(TimeOfDay t) =>
       '${t.hour.toString().padLeft(2, '0')}:${t.minute.toString().padLeft(2, '0')}';
 
-  // Picker: Date
+  // Pickers
   Future<void> _pickDate() async {
     final picked = await showDatePicker(
       context: context,
@@ -95,7 +85,6 @@ class _DateTimePickerFormState extends State<DateTimePickerForm> {
     }
   }
 
-  // Picker: Time
   Future<void> _pickTime() async {
     final picked = await showTimePicker(
       context: context,
@@ -109,7 +98,6 @@ class _DateTimePickerFormState extends State<DateTimePickerForm> {
     }
   }
 
-  // Picker: Date Range
   Future<void> _pickDateRange() async {
     final range = await showDateRangePicker(
       context: context,
@@ -129,7 +117,6 @@ class _DateTimePickerFormState extends State<DateTimePickerForm> {
     }
   }
 
-  // Picker: Date + Time
   Future<void> _pickDateTime() async {
     final date = await showDatePicker(
       context: context,
@@ -159,6 +146,59 @@ class _DateTimePickerFormState extends State<DateTimePickerForm> {
     });
   }
 
+  void _reset() {
+    _formKey.currentState?.reset();
+    setState(() {
+      _titleController.clear();
+      _dateController.clear();
+      _timeController.clear();
+      _startDateController.clear();
+      _endDateController.clear();
+      _dateTimeController.clear();
+      _selectedDate = null;
+      _selectedTime = null;
+      _selectedStartDate = null;
+      _selectedEndDate = null;
+      _selectedDateTime = null;
+    });
+  }
+
+  void _submit() {
+    if (_formKey.currentState?.validate() ?? false) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Form berhasil disimpan!')));
+    }
+  }
+
+  Widget _buildPickerField({
+    required TextEditingController controller,
+    required String label,
+    required String hint,
+    required VoidCallback onTap,
+  }) {
+    return TextFormField(
+      controller: controller,
+      readOnly: true,
+      onTap: onTap,
+      decoration: InputDecoration(
+        labelText: label,
+        hintText: hint,
+        border: const OutlineInputBorder(),
+      ),
+    );
+  }
+
+  Widget _previewRow(String title, String value) {
+    return Row(
+      children: [
+        Icon(Icons.check_circle_outline, size: 18, color: Colors.blue),
+        const SizedBox(width: 6),
+        Text('$title: $value', style: const TextStyle(fontSize: 14)),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -168,8 +208,82 @@ class _DateTimePickerFormState extends State<DateTimePickerForm> {
         child: Form(
           key: _formKey,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Tambahkan TextFormField dan picker field sesuai kebutuhan
+              TextFormField(
+                controller: _titleController,
+                decoration: const InputDecoration(
+                  labelText: 'Judul Acara',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 16),
+              _buildPickerField(
+                controller: _dateController,
+                label: 'Tanggal',
+                hint: 'Pilih tanggal',
+                onTap: _pickDate,
+              ),
+              const SizedBox(height: 16),
+              _buildPickerField(
+                controller: _timeController,
+                label: 'Waktu',
+                hint: 'Pilih waktu',
+                onTap: _pickTime,
+              ),
+              const SizedBox(height: 16),
+              _buildPickerField(
+                controller: _startDateController,
+                label: 'Tanggal Mulai',
+                hint: 'Pilih tanggal mulai',
+                onTap: _pickDateRange,
+              ),
+              const SizedBox(height: 16),
+              _buildPickerField(
+                controller: _endDateController,
+                label: 'Tanggal Selesai',
+                hint: 'Pilih tanggal selesai',
+                onTap: _pickDateRange,
+              ),
+              const SizedBox(height: 16),
+              _buildPickerField(
+                controller: _dateTimeController,
+                label: 'Tanggal & Waktu Sekaligus',
+                hint: 'Pilih tanggal & waktu',
+                onTap: _pickDateTime,
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(onPressed: _submit, child: const Text('Simpan')),
+              OutlinedButton(
+                onPressed: _reset,
+                child: const Text('Reset Form'),
+              ),
+              const SizedBox(height: 24),
+              if (_hasAnyValue)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Preview Data:',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 8),
+                    if (_titleController.text.isNotEmpty)
+                      _previewRow('Judul', _titleController.text),
+                    if (_dateController.text.isNotEmpty)
+                      _previewRow('Tanggal', _dateController.text),
+                    if (_timeController.text.isNotEmpty)
+                      _previewRow('Waktu', _timeController.text),
+                    if (_startDateController.text.isNotEmpty &&
+                        _endDateController.text.isNotEmpty)
+                      _previewRow(
+                        'Rentang',
+                        '${_startDateController.text} - ${_endDateController.text}',
+                      ),
+                    if (_dateTimeController.text.isNotEmpty)
+                      _previewRow('Tanggal & Waktu', _dateTimeController.text),
+                  ],
+                ),
             ],
           ),
         ),
