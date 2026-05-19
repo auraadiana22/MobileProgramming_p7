@@ -272,12 +272,28 @@ class _Pertemuan9PageState extends State<Pertemuan9Page> {
                 onPressed: _submit,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurple,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
                 ),
-                child: const Text('Simpan'),
+                child: const Text(
+                  'Simpan',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                ),
               ),
+              const SizedBox(height: 8),
               OutlinedButton(
                 onPressed: _reset,
-                child: const Text('Reset Form'),
+                style: OutlinedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  side: const BorderSide(color: Colors.deepPurple),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                ),
+                child: const Text('Reset Form', style: TextStyle(fontSize: 16)),
               ),
               const SizedBox(height: 24),
               if (_hasAnyValue)
