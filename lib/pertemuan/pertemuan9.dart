@@ -165,9 +165,18 @@ class _Pertemuan9PageState extends State<Pertemuan9Page> {
 
   void _submit() {
     if (_formKey.currentState?.validate() ?? false) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('Form berhasil disimpan!')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Row(
+            children: const [
+              Icon(Icons.check_circle, color: Colors.white),
+              SizedBox(width: 8),
+              Text('Form berhasil disimpan!'),
+            ],
+          ),
+          backgroundColor: Colors.deepPurple,
+        ),
+      );
     }
   }
 
@@ -184,15 +193,16 @@ class _Pertemuan9PageState extends State<Pertemuan9Page> {
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,
-        border: const OutlineInputBorder(),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+        suffixIcon: const Icon(Icons.calendar_today),
       ),
     );
   }
 
-  Widget _previewRow(String title, String value) {
+  Widget _previewRow(IconData icon, String title, String value) {
     return Row(
       children: [
-        Icon(Icons.check_circle_outline, size: 18, color: Colors.blue),
+        Icon(icon, size: 18, color: Colors.deepPurple),
         const SizedBox(width: 6),
         Text('$title: $value', style: const TextStyle(fontSize: 14)),
       ],
@@ -202,7 +212,10 @@ class _Pertemuan9PageState extends State<Pertemuan9Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Date & Time Picker')),
+      appBar: AppBar(
+        title: const Text('Date & Time Picker'),
+        backgroundColor: Colors.deepPurple,
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Form(
@@ -214,7 +227,9 @@ class _Pertemuan9PageState extends State<Pertemuan9Page> {
                 controller: _titleController,
                 decoration: const InputDecoration(
                   labelText: 'Judul Acara',
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                  ),
                 ),
               ),
               const SizedBox(height: 16),
@@ -252,37 +267,74 @@ class _Pertemuan9PageState extends State<Pertemuan9Page> {
                 hint: 'Pilih tanggal & waktu',
                 onTap: _pickDateTime,
               ),
-              const SizedBox(height: 16),
-              ElevatedButton(onPressed: _submit, child: const Text('Simpan')),
+              const SizedBox(height: 24),
+              ElevatedButton(
+                onPressed: _submit,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple,
+                ),
+                child: const Text('Simpan'),
+              ),
               OutlinedButton(
                 onPressed: _reset,
                 child: const Text('Reset Form'),
               ),
               const SizedBox(height: 24),
               if (_hasAnyValue)
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Preview Data:',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 8),
-                    if (_titleController.text.isNotEmpty)
-                      _previewRow('Judul', _titleController.text),
-                    if (_dateController.text.isNotEmpty)
-                      _previewRow('Tanggal', _dateController.text),
-                    if (_timeController.text.isNotEmpty)
-                      _previewRow('Waktu', _timeController.text),
-                    if (_startDateController.text.isNotEmpty &&
-                        _endDateController.text.isNotEmpty)
-                      _previewRow(
-                        'Rentang',
-                        '${_startDateController.text} - ${_endDateController.text}',
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade100,
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 8,
+                        offset: Offset(0, 4),
                       ),
-                    if (_dateTimeController.text.isNotEmpty)
-                      _previewRow('Tanggal & Waktu', _dateTimeController.text),
-                  ],
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Preview Data:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 8),
+                      if (_titleController.text.isNotEmpty)
+                        _previewRow(
+                          Icons.title,
+                          'Judul',
+                          _titleController.text,
+                        ),
+                      if (_dateController.text.isNotEmpty)
+                        _previewRow(
+                          Icons.calendar_today,
+                          'Tanggal',
+                          _dateController.text,
+                        ),
+                      if (_timeController.text.isNotEmpty)
+                        _previewRow(
+                          Icons.access_time,
+                          'Waktu',
+                          _timeController.text,
+                        ),
+                      if (_startDateController.text.isNotEmpty &&
+                          _endDateController.text.isNotEmpty)
+                        _previewRow(
+                          Icons.date_range,
+                          'Rentang',
+                          '${_startDateController.text} - ${_endDateController.text}',
+                        ),
+                      if (_dateTimeController.text.isNotEmpty)
+                        _previewRow(
+                          Icons.schedule,
+                          'Tanggal & Waktu',
+                          _dateTimeController.text,
+                        ),
+                    ],
+                  ),
                 ),
             ],
           ),
