@@ -3,6 +3,8 @@ import '../main.dart';
 import '../pertemuan/pertemuan5.dart';
 import '../pertemuan/pertemuan6.dart';
 import '../pertemuan/pertemuan7.dart';
+import '../pertemuan/pertemuan8.dart';
+import '../pertemuan/pertemuan9.dart';
 
 class BerandaPage extends StatelessWidget {
   final ProfileData profile;
@@ -46,8 +48,19 @@ class BerandaPage extends StatelessWidget {
         title: "Pertemuan 8",
         color: Colors.purple,
         onTap: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Halaman Pertemuan 8 belum dibuat")),
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const Pertemuan8Page()),
+          );
+        },
+      ),
+      _DashboardItem(
+        title: "Pertemuan 9",
+        color: Colors.blue,
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const Pertemuan9Page()),
           );
         },
       ),
